@@ -8,25 +8,31 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<!-- Link FontAwesome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<!-- Link Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Rubik:400,900" rel="stylesheet">
 	<!-- Link Custom CSS -->
 	<link rel="stylesheet" type="text/css" href="Assets/style.css">
 </head>
 <body>
 	<!-- Visual Data Goes Here -->
-	<nav class="navbar navbar-light bg-light">
+
+	<!-- Nav Bar -->
+	<nav class="navbar">
 		<h1>Giffy Search</h1>
-	  	<div class="form-group">
-			<label for="InputGif">Add A New Gif Button:</label>
+	  	<div class="form-group navbar-form">
+			<label for="InputGif">Add A New Gif Tag To Search:</label>
 			<input type="text" id="inputGif" name="InputGif">
-			<button type="submit" id="submit" class="btn btn-dark">Add Button</button>
+			<button type="submit" id="submit" class="btn"><i class="fas fa-plus"></i> Add Button</button>
+			<button type="button" id="clear-button" class="btn"><i class="far fa-trash-alt"></i> Clear</button>
 		</div>
 	</nav>
-	<div class="container">
-		
-		<div class="buttons-div row">
+
+	<!-- Container for data -->
+	<div class="container row">
+		<div class="col-3 buttons-div pt-3">
 			<!-- buttons will go here when js loads -->
 		</div>
-		<div class="images-div">
+		<div class="images-div col-9 card-columns">
 			<!-- gifs appear here when buttons are clicked -->
 		</div>
 	</div>

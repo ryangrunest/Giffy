@@ -11,13 +11,17 @@ var topics = ['Michael Scott', 'Kanye West', 'Friends', 'Obama', 'Jeff Goldblum'
 function loadTopicsButtons() {
 	$('.buttons-div').text('');
 	topics.forEach(topic => {
-	var storedElement = $('<button>').attr('class', 'btn btn-dark col m-1 gif-buttons').attr('value', topic).text(topic);
+	var storedElement = $('<button>').attr('class', 'btn m-1 gif-buttons').attr('value', topic).text(topic);
 	$('.buttons-div').append(storedElement);
 	});
 };
 loadTopicsButtons();
 
-
+$('#clear-button').on('click', function() {
+	topics = [];
+	loadTopicsButtons();
+	$('.images-div').text('');
+})
 
 // button click to load images
 $('.buttons-div').on('click', '.gif-buttons', function() {
@@ -30,18 +34,35 @@ $('.buttons-div').on('click', '.gif-buttons', function() {
 		url: queryURL,
 		method: 'GET',
 		success: function(response) {
+			console.log(response);
 			$('.images-div').text('');
 			// console.log(response);
 			// console.log(response.data.length);
 			for (var i = 0; i < response.data.length; i++) {
-				var imageDiv = $('<div>');
-				var newImg = $('<img>').attr('src', response.data[i].images.original_still.url);
+				// create div to append all data to
+				var imageDiv = $('<div>').attr('class', 'card');
+				// create textbody for text to be appended to
+				var textBody = $('<div>').attr('class', 'card-body');
+				// create rating text element to append to textbody
 				var ratingDiv = $('<p>').text(`Rating: '${response.data[i].rating}'`);
+				// create div with date the gif was created
+				var dateDiv = $('<p>').text(`Date Created: ${response.data[i].import_datetime}`);
+				// store source url from response in variable
+				var source = response.data[i].source;
+				// create new div for source
+				var sourceText = $('<a>').attr('href', source).text(`Source: ${source}`).attr('target', '_blank');
+				// create image element
+				var newImg = $('<img>').attr('src', response.data[i].images.original_still.url).attr('class', 'card-img-top');
+				// add attributes to images for click event handling
 				newImg.attr('fixed', response.data[i].images.original_still.url);
 				newImg.attr('animated', response.data[i].images.original.url);
 				newImg.attr('value', 'off');
 				newImg.attr('id', 'gif');
-				imageDiv.append(ratingDiv, newImg);
+				// append all text to the textbody
+				textBody.append(ratingDiv, dateDiv, sourceText);
+				// append text body and image to card
+				imageDiv.append(newImg, textBody);
+				// add element to dom
 				$('.images-div').append(imageDiv);
 			};
 		},
