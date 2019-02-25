@@ -8,14 +8,19 @@ var topics = ['Michael Scott', 'Kanye West', 'Friends', 'Obama', 'Jeff Goldblum'
 
 
 // loop through buttons array and append to buttons div
-topics.forEach(topic => {
-	var storedElement = $('<button>').attr('class', 'btn btn-dark col m-1').attr('value', topic).text(topic);
+function loadTopicsButtons() {
+	$('.buttons-div').text('');
+	topics.forEach(topic => {
+	var storedElement = $('<button>').attr('class', 'btn btn-dark col m-1 gif-buttons').attr('value', topic).text(topic);
 	$('.buttons-div').append(storedElement);
-});
+	});
+};
+loadTopicsButtons();
+
 
 
 // button click to load images
-$('button').on('click', function() {
+$('.buttons-div').on('click', '.gif-buttons', function() {
 	var value = $(this).attr('value');
 	console.log(value);
 	// save query URL
@@ -26,8 +31,8 @@ $('button').on('click', function() {
 		method: 'GET',
 		success: function(response) {
 			$('.images-div').text('');
-			console.log(response);
-			console.log(response.data.length);
+			// console.log(response);
+			// console.log(response.data.length);
 			for (var i = 0; i < response.data.length; i++) {
 				var imageDiv = $('<div>');
 				var newImg = $('<img>').attr('src', response.data[i].images.original_still.url);
@@ -63,8 +68,7 @@ var inputText;
 $('#submit').on('click', function() {
 	inputText = $('#inputGif').val();
 	topics.push(inputText);
-	console.log(topics);
-	alert(inputText);
+	loadTopicsButtons();
 })
 
 
