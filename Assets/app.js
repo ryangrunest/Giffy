@@ -46,6 +46,8 @@ $('button').on('click', function() {
 	});
 });
 
+
+// add click functionality for gifs to change from animated to still
 $('.images-div').on('click', '#gif', function() {
 	if ($(this).attr('value') === 'off') {
 		$(this).attr('value', 'on').attr('src', $(this).attr('animated'));
@@ -56,6 +58,14 @@ $('.images-div').on('click', '#gif', function() {
 	}
 });
 
+var inputText;
+// submit button functionality
+$('#submit').on('click', function() {
+	inputText = $('#inputGif').val();
+	topics.push(inputText);
+	console.log(topics);
+	alert(inputText);
+})
 
 
 
